@@ -1,0 +1,73 @@
+package com.company;
+import java.util.Arrays;
+import java.util.Random;
+
+public class Main {
+
+    public static final int ARRAY_SIZE = 50000000;
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        int[] array = new int[ARRAY_SIZE];
+        int[] checkArray = new int[ARRAY_SIZE];
+
+        for(int i = 0; i < array.length; i++) {
+            array[i] = random.nextInt(5000000);
+        }
+
+        System.arraycopy(array, 0, checkArray, 0, ARRAY_SIZE);
+        System.out.println("Start user sort");
+        long time = System.currentTimeMillis();
+        sort(array);
+        System.out.format("sorted: %.3f seconds\r\n", (System.currentTimeMillis()-time) / 1000d);
+        System.out.println("Start java lib sort");
+        time = System.currentTimeMillis();
+        Arrays.sort(checkArray);
+        System.out.format("sorted: %.3f seconds\r\n", (System.currentTimeMillis()-time) / 1000d);
+        System.out.println("Check result");
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] != checkArray[i]) {
+                throw new RuntimeException("Error in index: "+i);
+            }
+        }
+        System.out.println("OK");
+//        for (int i = 0; i < array.length; i++)
+//            System.out.print(array[i]+ " ");
+    }
+    public static int[] sort(int[] array) {
+        int i, j;
+        int[] bucket = new int[array.length];
+        Arrays.fill(bucket, 0);	//массив из нулей
+
+        for (i = 0; i < array.length; i++) {
+            bucket[array[i]]++;
+        }
+
+//        for (i = 0; i < bucket.length; i++) { //вывод блочного массива
+//            System.out.println(bucket[i]);
+//        }
+
+        int k=0;
+        for (i = 0; i < bucket.length; i++) {
+            for (j = 0; j<bucket[i]; j++) {
+                array[k] = i;
+                k++;
+            }
+        }
+        boolean isSorted = false;
+        int buf;
+        while(!isSorted) {
+            isSorted = true;
+            for (int l = 0; l < array.length-1; l++) {
+                if(array[l] > array[l+1]){
+                    isSorted = false;
+
+                    buf = array[l];
+                    array[l] = array[l+1];
+                    array[l+1] = buf;
+                }
+            }
+        }
+        return array;
+    }
+}
