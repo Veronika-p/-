@@ -1,0 +1,84 @@
+package com.veronika;
+import java.util.LinkedList;
+//LinkedList — реализует интерфейс List. Является представителем двунаправленного списка,
+//где каждый элемент структуры содержит указатели на предыдущий и следующий элементы.
+public class Deque2 implements Deque{
+
+    LinkedList dec = new LinkedList();
+    public int count;
+
+//    @Override
+//    public boolean isEmpty() {
+//        if(dec.contains(null)) return true;
+//        else return false;
+//    }
+
+    @Override
+    public boolean isFull() {
+
+        if(dec.contains(null)) {
+            return false;
+        }//проверка на наличие элемента в списке
+        else return true;
+    }
+
+    @Override
+    public void pushBack(Object value) {
+        dec.addFirst(value);
+        // добавляет элемент в начало списка
+        count++;
+    }
+
+//    @Override
+//    public Object popBack() {
+//        count--;
+//        Object res = dec.peekFirst();
+//        //.peekFirst() получает первый элемент
+//        dec.removeFirst();
+//        //удаление первого элемента
+//        return res;
+//    }
+
+//    @Override
+//    public Object peekBack() {
+//        Object res = dec.peekFirst();
+//        return res;
+//    }
+
+    @Override
+    public void pushFront(Object value) {
+        dec.addLast(value);
+        count++;
+    }
+
+//    @Override
+//    public Object popFront() {
+//        count--;
+//        Object res = dec.peekLast();
+//        //peekLast() получает последний элемент
+//        dec.removeLast();
+//        //удаляет последний элемент из конца списка
+//        return res;
+//    }
+
+//    @Override
+//    public Object peekFront() {
+//        Object res = dec.peekLast();
+//        return res;
+//    }
+
+
+    @Override
+    public boolean contains(Object o) {
+        return dec.contains(o);
+    }
+
+//    public boolean contains(Object o) {
+//        return dec.contains(o);
+//    }
+
+    public void remove(Object k) {
+        dec.remove(k);
+        count--;
+    }
+}
