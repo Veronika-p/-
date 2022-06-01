@@ -1,0 +1,41 @@
+package com.veronika;
+import java.util.Random;
+
+    public class Main {
+
+    public static void main(String[] args) {
+        // 1. Создать дэк размерностью 10 элементов (Интерфейс Deque)
+        Deque2 dec2 = new Deque2();
+        for(int i=0; i<10;i++) {
+            dec2.pushFront(null);//добавляет в конец
+        }
+        Random random = new Random();
+        System.out.println("#1 "+ dec2.dec);
+
+        // 2. Заполнить пока не полон случайными элементами
+
+        while (dec2.isFull()==false){
+
+            if (dec2.contains(null)){
+                dec2.remove(null);
+                dec2.pushBack(random.nextInt());//добавляет в начало
+            }
+        }
+
+        System.out.println("#2 "+dec2.dec);
+
+        System.out.println("count " + dec2.count); //кол-во элементов дэка
+
+        // 3. Вывести в консоль содержимое дека, извлекая по очереди элементы с начала и конца дека
+
+        System.out.println("#3");
+        for(int i=0; i<5;i++){
+            System.out.println("element " + i + ": " + dec2.dec.get(i));
+            for(int j = 9; ;) {
+                j-=i;
+                System.out.println("element " + j + ": " + dec2.dec.get(j));
+                break;
+            }
+        }
+    }
+}
