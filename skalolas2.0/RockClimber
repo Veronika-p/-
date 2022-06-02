@@ -1,0 +1,35 @@
+private int max_height;
+    private int drop_height;
+    private int lenght;
+    private int[] route;
+
+    public RockClimber(int max_height, int drop_height, int lenght) {
+            this.max_height = max_height;
+            this.drop_height = drop_height;
+            this.lenght = lenght;
+
+        if (drop_height>max_height){
+            this.drop_height=max_height;
+        }
+        generateRoute();
+    }
+    private void generateRoute() {
+        route = new int[lenght];
+
+        int k;
+        Random random = new Random();
+        route[0] = random.nextInt(max_height);//01234
+        for (int i = 1; i < lenght; i++) {//0123
+            route[i] = Math.abs(route[i-1] + (random.nextInt(drop_height) - random.nextInt(drop_height)));
+            if (route[i] > max_height) {
+                route[i]=max_height;
+            }
+        }
+    }
+    public void printRoute() {
+        System.out.println();
+        for (int i = 0; i < lenght; i++) {
+            System.out.print(route[i] + " ");
+        }
+    }
+}
