@@ -1,0 +1,33 @@
+package com.veronika;
+import java.util.Scanner;
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Кол-во скалолазов: ");
+        int count = scanner.nextInt();
+        RockClimber[] Climbers = new RockClimber[count];
+
+        for (int i = 0; i < count; i++) {
+
+            System.out.printf("скалолаз %d:\n", i+1 );
+
+            System.out.print("максимальная высота возвышенности: ");
+            int m = scanner.nextInt();
+
+            System.out.print("высота перепада трех ближайших препятствий: ");
+            int d = scanner.nextInt();
+
+            System.out.print("длина маршрута: ");
+            int l = scanner.nextInt();
+
+            Climbers[i] = new RockClimber(m, d, l);
+        }
+        System.out.println("маршруты: ");
+        for (int i = 0; i < count; i++) {
+            System.out.printf("\nскалолаз %d: ", i+1);
+            Climbers[i].printRoute();
+            Climbers[i].renderRoute();
+        }
+    }
+}
